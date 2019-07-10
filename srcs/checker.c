@@ -11,15 +11,28 @@ t_stack  *ft_listnew(int nb)
     return (new);
 }
 
-void    ft_lstaddend(t_stack **alist, t_stack *new)
+void    ft_lstaddend(t_start *start, t_stack *new)
 {
+	t_stack		*list_a;
+
+	if (!(start->list_a))
+		start->list_a = new;
+	
+	else
+	{
+		list_a = start->list_a;
+		while (list_a->next != NULL)
+			list_a = list_a->next;
+		list_a->next = new;
+	}
+	/* 
     t_stack      *tmp;
 
 
     tmp = *alist;
     while (tmp != NULL && tmp->next != NULL)
         tmp = tmp->next;
-    tmp->next = new;
+    tmp->next = new;*/
 }
 
 int		ft_one(char *str)
@@ -64,6 +77,8 @@ int		main(int ac, char **av)
 	i = 0;
 	if (!(start = malloc(sizeof(t_start))))
 		return(0);
+	start->list_a = NULL;
+	start->list_b = NULL;
 	if (ac == 2)
 	{
 		if (ft_one(av[1]))
@@ -81,7 +96,7 @@ int		main(int ac, char **av)
 				if (ft_isanint(tab[i]))
 				{
 					tmp = ft_listnew(atoi(tab[i]));
-					ft_lstaddend(&start->list_a, tmp);
+					ft_lstaddend(start, tmp);
 				}
 				else
 					printf("Error2\n");
@@ -89,6 +104,13 @@ int		main(int ac, char **av)
 			}
 		}
 	}
+	/*
+	tmp = start->list_a;
+	while (tmp != NULL)
+	{
+		printf("is : %d\n", tmp->nb);
+		tmp = tmp->next;
+	} */
 	return (0);
 }
 
