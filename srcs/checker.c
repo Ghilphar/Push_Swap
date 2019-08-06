@@ -104,6 +104,20 @@ int		main(int ac, char **av)
 			}
 		}
 	}
+	if (ac > 2)
+	{
+		while (ft_isanint(av[++i]))
+		{
+			tmp = ft_listnew(atoi(av[i]));
+			ft_lstaddend(start, tmp);
+		}
+		if (i != (ac))
+			printf("Error3");
+	}
+	while (get_next_line(0, tab))
+	{
+		if (tab = )
+	}
 	/*
 	tmp = start->list_a;
 	while (tmp != NULL)
