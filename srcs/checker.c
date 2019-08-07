@@ -25,14 +25,6 @@ void    ft_lstaddend(t_start *start, t_stack *new)
 			list_a = list_a->next;
 		list_a->next = new;
 	}
-	/* 
-    t_stack      *tmp;
-
-
-    tmp = *alist;
-    while (tmp != NULL && tmp->next != NULL)
-        tmp = tmp->next;
-    tmp->next = new;*/
 }
 
 int		ft_one(char *str)
@@ -81,27 +73,17 @@ int		main(int ac, char **av)
 	start->list_b = NULL;
 	if (ac == 2)
 	{
-		if (ft_one(av[1]))
+		tab = ft_strsplit(av[1], ' ');
+		while (tab[i] != 0)
 		{
-			if (ft_isanint(av[1]))
-				start->list_a = ft_listnew(atoi(av[1]));
-			else
-				printf("Error1\n");
-		}
-		else
-		{
-			tab = ft_strsplit(av[1], ' ');
-			while (tab[i] != 0)
+			if (ft_isanint(tab[i]))
 			{
-				if (ft_isanint(tab[i]))
-				{
-					tmp = ft_listnew(atoi(tab[i]));
-					ft_lstaddend(start, tmp);
-				}
-				else
-					printf("Error2\n");
-				i++;
+				tmp = ft_listnew(atoi(tab[i]));
+				ft_lstaddend(start, tmp);
 			}
+			else
+				printf("Error2\n");
+			i++;
 		}
 	}
 	if (ac > 2)
@@ -118,13 +100,6 @@ int		main(int ac, char **av)
 	{
 		if (tab = )
 	}
-	/*
-	tmp = start->list_a;
-	while (tmp != NULL)
-	{
-		printf("is : %d\n", tmp->nb);
-		tmp = tmp->next;
-	} */
 	return (0);
 }
 
