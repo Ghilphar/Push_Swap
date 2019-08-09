@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 14:44:47 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/08/09 12:54:10 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/08/09 13:41:22 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_pushs(char *line, t_start *start)
 {
-	printf("PUSHS");
 	if (ft_strcmp(line, "pa") == 0)
 		push_a(start);
 	else if (ft_strcmp(line, "pb") == 0)

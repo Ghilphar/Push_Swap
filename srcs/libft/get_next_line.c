@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 14:35:06 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/08/09 09:35:21 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/08/09 13:33:10 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int				get_next_line(const int fd, char **line)
 	int				ret;
 
 	if (fd < 0 || BUFF_SIZE <= 0 || !line || read(fd, "test", 0))
-		return (-1);
+		return (-2);
 	current = find_save(&save, fd);
 	*line = NULL;
 	ret = ft_read(fd, &(current->content));

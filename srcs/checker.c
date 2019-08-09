@@ -159,12 +159,11 @@ void	ft_Operate(t_start *start)
 {
 	char	**line;
 	int		i;
-	int		r;
 
 	i = 0;
-	while (i == 0 && (r = get_next_line(0, line)) == 1)
+	line = malloc(sizeof(line));
+	while (i == 0 && get_next_line(0, line) == 1)
 	{
-		printf("ici");
 		if ((ft_strcmp(*line, "sa")) == 0 || (ft_strcmp(*line, "sb") == 0)
 		|| (ft_strcmp(*line, "ss") == 0))
 			ft_swaps(*line, start);
