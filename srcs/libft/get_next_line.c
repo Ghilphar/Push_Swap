@@ -3,95 +3,97 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgaribot <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/10 13:51:22 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/01/10 13:51:25 by fgaribot         ###   ########.fr       */
+/*   Created: 2018/11/16 14:35:06 by fgaribot          #+#    #+#             */
+/*   Updated: 2019/08/09 09:35:21 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <unistd.h>
-#include <stdlib.h>
+#include "get_next_line.h"
 
-static t_list	*ft_link_select(size_t fd, t_list **lst)
+static char		*ft_addline(char **line, char *src, char c)
 {
-	t_list			*new;
-
-	new = *lst;
-	while (new)
-	{
-		if (new->content_size == fd)
-			return (new);
-		new = new->next;
-	}
-	if (!(new = ft_lstnew("\0", 1)))
-		return (NULL);
-	new->content_size = fd;
-	ft_lstadd(lst, new);
-	return (new);
-}
-
-static int		ft_red(void **str, int fd)
-{
-	char			buf[BUFF_SIZE + 1];
-	char			*tmp;
-	int				ret;
-
-	if (read(fd, buf, 0) < 0)
-		return (0);
-	while (!ft_strchr(*str, '\n') && (ret = read(fd, buf, BUFF_SIZE)))
-	{
-		if (ret == -1)
-			return (0);
-		buf[ret] = '\0';
-		tmp = *str;
-		if (!(*str = ft_strjoin(*str, buf)))
-			return (0);
-		free(tmp);
-	}
-	return (1);
-}
-
-static int		ft_line_treat(void **str, char **line)
-{
-	char			*tmp;
 	int				i;
-	int				j;
+	char			*tmp;
+	char			*tmp2;
 
-	if (!str || !(*str))
-		return (-1);
-	i = ft_strlen(*str);
-	tmp = *str;
-	if (ft_strchr(*str, '\n'))
+	i = 0;
+	tmp = NULL;
+	i = ft_countchar(src, c);
+	if (!(tmp = malloc(sizeof(tmp) * (i + 1))))
+		return (0);
+	tmp = ft_strcpc(tmp, src, c);
+	*line = tmp;
+	if (src[i] == '\n')
 	{
-		j = ft_strlen(ft_strchr(*str, '\n'));
-		if (!(*line = ft_strsub(*str, 0, i - j)))
-			return (-1);
-		if (!(*str = ft_strsub(*str, i - j + 1, i)))
-			return (-1);
+		if (!(tmp2 = ft_strdup(src + (i + 1))))
+			return (NULL);
 	}
 	else
 	{
-		if (!(*line = ft_strdup(*str)))
-			return (-1);
-		*str = NULL;
+		if (!(tmp2 = ft_strdup(src + (i))))
+			return (NULL);
 	}
-	free(tmp);
+	free(src);
+	return (tmp2);
+}
+
+static t_list	*find_save(t_list **save, size_t fd)
+{
+	t_list			*tmp;
+
+	tmp = *save;
+	while (tmp)
+	{
+		if (tmp->content_size == fd)
+			return (tmp);
+		tmp = tmp->next;
+	}
+	if (!(tmp = ft_lstnew("\0", 1)))
+		return (NULL);
+	tmp->content_size = fd;
+	ft_lstadd(save, tmp);
+	return (tmp);
+}
+
+static int		ft_read(int fd, void **str)
+{
+	char			buf[BUFF_SIZE + 1];
+	int				read_size;
+	void			*tmp;
+
+	tmp = NULL;
+	while ((read_size = read(fd, buf, BUFF_SIZE)))
+	{
+		if (read_size == -1)
+			return (-1);
+		buf[read_size] = '\0';
+		tmp = *str;
+		if (!(*str = ft_strjoin(*str, buf)))
+			return (-1);
+		free(tmp);
+		tmp = NULL;
+		if (ft_strchr(buf, '\n'))
+			break ;
+	}
+	if (read_size < BUFF_SIZE && !ft_strlen(*str))
+		return (0);
 	return (1);
 }
 
 int				get_next_line(const int fd, char **line)
 {
-	static t_list	*lst;
+	static t_list	*save;
 	t_list			*current;
+	int				ret;
 
-	if (fd < 0 || !line || BUFF_SIZE <= 0)
+	if (fd < 0 || BUFF_SIZE <= 0 || !line || read(fd, "test", 0))
 		return (-1);
-	current = ft_link_select(fd, &lst);
-	if (!ft_red(&(current->content), fd))
+	current = find_save(&save, fd);
+	*line = NULL;
+	ret = ft_read(fd, &(current->content));
+	if (!(current->content = ft_addline(&(*line), current->content, '\n')))
 		return (-1);
-	if (!current->content || !ft_strlen(current->content))
-		return (0);
-	return (ft_line_treat(&(current->content), &(*line)));
+	return (ret);
 }

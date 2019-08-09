@@ -6,11 +6,21 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 14:43:58 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/07/08 17:28:50 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/08/09 12:31:05 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
+
+void	ft_swaps(char *line, t_start *start)
+{
+	if (ft_strcmp(line, "sa") == 0)
+		swap_a(start);
+	else if (ft_strcmp(line, "sb") == 0)
+		swap_b(start);
+	else if (ft_strcmp(line, "ss") == 0)
+		swap_s(start);	
+}
 
 void	swap_a(t_start *start)
 {

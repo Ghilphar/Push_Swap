@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 09:14:07 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/08/07 12:55:41 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/08/09 11:07:30 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ char	**ft_strsplit(char const *s, char c)
 			i = i + (ft_countchar(s + i, c));
 		}
 	}
-	tab[j] = 0;
+	tab[j] = NULL;
 	return (tab);
 }

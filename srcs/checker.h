@@ -30,16 +30,26 @@ typedef struct      s_start
 ** OPERATIONS
 */
 
+typedef		void (*Operations_t)(t_start *start);
+
+void		ft_swaps(char *line, t_start *start);
+
 void        swap_a(t_start *start);
 void        swap_b(t_start *start);
 void        swap_s(t_start *start);
 
+void		ft_pushs(char *line, t_start *start);
+
 void        push_a(t_start *start);
 void        push_b(t_start *start);
+
+void		ft_rotates(char *line, t_start *start);
 
 void        rotate_a(t_start *start);
 void        rotate_b(t_start *start);
 void        rotate_r(t_start *start);
+
+void		ft_reverse_rotates(char *line, t_start *start);
 
 void        reverse_rotate_a(t_start *start);
 void        reverse_rotate_b(t_start *start);
