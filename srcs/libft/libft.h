@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 18:17:52 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/08/09 09:32:25 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/08/10 09:09:21 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,6 @@ float				ft_recursive_power(int nb, int power);
 int					get_next_line(int fd, char **line);
 char				*ft_replace(char *str, char find, char replace);
 char				*ft_strtrimc(char *s, char c);
+int					ft_isanint(char *str);
 
 #endif

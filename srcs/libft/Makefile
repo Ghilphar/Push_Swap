@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgaribot <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:15:16 by fgaribot          #+#    #+#              #
-#    Updated: 2018/12/12 17:12:34 by fgaribot         ###   ########.fr        #
+#    Updated: 2019/08/10 10:45:34 by fgaribot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ FILES = $(SRC)ft_memset.c\
 		$(SRC)ft_atoi.c\
 		$(SRC)ft_putchar_fd.c\
 		$(SRC)ft_putnbr.c\
+		$(SRC)ft_isanint.c\
 		$(SRC)ft_isalpha.c\
 		$(SRC)ft_isdigit.c\
 		$(SRC)ft_isalnum.c\
@@ -89,13 +90,13 @@ OBJ = $(FILES:.c=.o)
 all : $(NAME)
 
 $(NAME): $(OBJ)
-	$(AR) $(NAME) $(OBJ)
-	ranlib $(NAME)
+	@($(AR) $(NAME) $(OBJ))
+	@(ranlib $(NAME))
 
 clean :
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all

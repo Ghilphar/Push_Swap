@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/10 09:14:39 by fgaribot          #+#    #+#             */
+/*   Updated: 2019/08/10 09:16:59 by fgaribot         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CHECKER_H
 # define CHECKER_H
 
@@ -5,6 +17,7 @@
 ** LIBRAIRIES
 */
 
+# include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include "./libft/libft.h"
@@ -25,6 +38,20 @@ typedef struct      s_start
     t_stack          *list_b;
 }                   t_start;
 
+/*
+** TESTS
+*/
+
+void	ft_double(t_start **start);
+void	ft_sorted(t_start *start);
+
+/*
+** EXITS
+*/
+
+void	ft_exit_success(t_start *start);
+void    ft_exit_failure(t_start *start);
+void	ft_exit_error(t_start *start);
 
 /*
 ** OPERATIONS
