@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 09:14:39 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/08/10 09:16:59 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/08/11 20:59:58 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@ void	ft_sorted(t_start *start);
 void	ft_exit_success(t_start *start);
 void    ft_exit_failure(t_start *start);
 void	ft_exit_error(t_start *start);
+
+/*
+** PARSING
+*/
+
+void	ft_initialise(int ac, char **av, t_start **start);
+void	ft_add(t_start **start, char *num);
 
 /*
 ** OPERATIONS
