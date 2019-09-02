@@ -6,7 +6,7 @@
 #    By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/10 09:32:48 by fgaribot          #+#    #+#              #
-#    Updated: 2019/08/10 10:45:31 by fgaribot         ###   ########.fr        #
+#    Updated: 2019/09/02 12:35:43 by fgaribot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ FILES = $(SRC)pushs.c\
 		$(SRC)reverse_rotate.c\
 		$(SRC)checker_tests.c\
 		$(SRC)checker_exits.c\
+		$(SRC)parsing.c\
 		$(SRC)checker.c
 
 OBJ= $(FILES:.c=.o)
