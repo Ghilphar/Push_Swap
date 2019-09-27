@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 20:53:53 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/09/02 16:25:00 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/09/27 15:40:47 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 /*
 void    ft_algo(t_start **start)
 {
-
+	
 }
 */
 
@@ -79,10 +79,13 @@ int     main(int ac, char **av)
     ft_double(&start);
 	ft_sort(start);
 	
+
+	/*
 	test = (start->data)->sorted;
 	while (test != NULL)
 	{
 		printf("%d\n", test->nb);
 		test = test->next;
 	}
+	*/
 }
