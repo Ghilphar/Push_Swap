@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 09:14:39 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/09/02 16:22:19 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/10 20:02:21 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,41 @@
 
 typedef struct       s_stack
 {
-    int              nb;
-    struct s_stack    *next;
-}                    t_stack;
+    int             nb;
+    struct s_stack  *next; // (struct s_stack = t_stack)
+}                   t_stack;
 
 typedef struct		s_data
 {
 	t_stack			*sorted;
-	int				pivot;
-	int				list_nb;
+	int				place_on_b;
+	int				max_list_b;
+	int				min_list_b;
+	int				nb_list_a;
+	int				nb_list_b;
+	int				first_total;
 }					t_data;
 
 typedef struct      s_start
 {
+	t_nb_operations *operations_to_do;
+	t_nb_operations *operations_tmp;
 	t_data			*data;
     t_stack			*list_a;
     t_stack			*list_b;
 }                   t_start;
+
+typedef struct		s_nb_operations
+{
+	int				ra;
+	int				rb;
+	int				rra;
+	int				rrb;
+	int				rr;
+	int				rrr;
+	int				total;
+}					t_nb_operations;
+
 
 /*
 ** TESTS
