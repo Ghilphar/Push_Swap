@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 20:53:53 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/10 20:02:10 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/11 04:31:38 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,70 @@ void	Operate_pa(t_start *start, int i)
 		write(0,"pa\n", 3);
 	}
 }
-/*
-void	Operate_ra(t_start *start)
+
+void	Operate_pb(t_start *start, int i)
 {
-	rotate_a(start);
-	write(0, "ra\n", 3);
+	while (i-- > 0)
+	{
+		push_b(start);
+		write(0,"pb\n", 3);
+	}
 }
-*/
+
+void	Operate_ra(t_start *start, int i)
+{
+	while (i-- > 0)
+	{
+		rotate_a(start);
+		write(0, "ra\n", 3);
+	}
+}
+
+void	Operate_rb(t_start *start, int i)
+{
+	while (i-- > 0)
+	{
+		rotate_b(start);
+		write(0, "rb\n", 3);
+	}
+}
+
+void	Operate_rr(t_start *start, int i)
+{
+	while (i-- > 0)
+	{
+		reverse_rotate_r(start);
+		write(0, "rr\n", 3);
+	}
+}
+
+void	Operate_rra(t_start *start, int i)
+{
+	while (i-- > 0)
+	{
+		reverse_rotate_a(start);
+		write(0, "rra\n", 4);
+	}
+}
+
+void	Operate_rrb(t_start *start, int i)
+{
+	while (i-- > 0)
+	{
+		reverse_rotate_b(start);
+		write(0, "rrb\n", 4);
+	}
+}
+
+void	Operate_rrr(t_start *start, int i)
+{
+	while (i-- > 0)
+	{
+		reverse_rotate_r(start);
+		write(0, "rrr\n", 3);
+	}
+}
+
 /*
 void	ft_split(t_stack *list, t_stack *last, t_start *start)
 {
@@ -97,8 +154,9 @@ void	ft_underaction(t_start *start)
 		return;
 	ft_reset_operations(start->operations_to_do);
 	ft_reset_operations(start->operations_tmp);
-	Operate_pa(start, 2);
-
+	Operate_pb(start, 2);
+	start->data->nb_list_a = ft_count_list(start->list_a);
+	start->data->nb_list_b = ft_count_list(start->list_b);
 }
 
 void	merge_rr_rrr(t_start *start)
@@ -195,6 +253,8 @@ void	good_combination(t_start *start)
 
 void	new_best(t_start *start)
 {
+	printf("ra = %d, rb = %d, rr = %d, rra = %d, rrb = %d, rrr = %d, total = %d\n", start->operations_tmp->ra, start->operations_tmp->rb,
+	start->operations_tmp->rr, start->operations_tmp->rra, start->operations_tmp->rrb, start->operations_tmp->rrr, start->operations_tmp->total);
 	if (start->operations_tmp->total < start->operations_to_do->total)
 	{
 		free(start->operations_to_do);
@@ -220,8 +280,15 @@ void	ft_calcul_operations(int nb, int i, t_start *start)
 {
 	start->operations_tmp->ra = i - 1;
 	start->operations_tmp->rra = start->data->nb_list_a - i + 1; // if result = list_nb , real result is 0;
+	if (start->operations_tmp->rra == start->data->nb_list_a)
+		start->operations_tmp->rra = 0;
 	start->operations_tmp->rb = start->data->place_on_b;
+	printf("place sur b = %d\n", start->data->place_on_b);
 	start->operations_tmp->rrb = start->data->nb_list_b - start->data->place_on_b;
+	if (start->data->place_on_b == start->data->nb_list_b)
+		start->operations_tmp->rrb = 1;
+	//printf("ra = %d, rb = %d, rr = %d, rra = %d, rrb = %d, rrr = %d\n", start->operations_tmp->ra, start->operations_tmp->rb,
+	//start->operations_tmp->rr, start->operations_tmp->rra, start->operations_tmp->rrb, start->operations_tmp->rrr);
 	good_combination(start);
 	new_best(start);
 }
@@ -245,19 +312,19 @@ int		correct_place(t_start *start, int nb)
 	tmp_2 = tmp_1;
 	while (tmp_2->next != NULL)
 		tmp_2 = tmp_2->next;
-	if ((tmp_1->nb < tmp_2->nb && (nb > tmp_1->nb && nb > tmp_2->nb) ||
-	(nb < tmp_1->nb && nb < tmp_2->nb))
-	|| (tmp_1->nb > tmp_2->nb && (nb < tmp_1->nb && nb > tmp_2->nb)))
+	if ((tmp_1->nb < tmp_2->nb && ((nb > tmp_1->nb && nb > tmp_2->nb) ||
+	(nb < tmp_1->nb && nb < tmp_2->nb)))
+	|| ((nb < tmp_1->nb && nb > tmp_2->nb) && tmp_1->nb > tmp_2->nb))
 		return (0);
 	tmp_2 = tmp_1->next;
-	while (nb < tmp_2->nb && (nb > tmp_1->nb || tmp_1->nb == start->data->max_list_b))
+	while (tmp_2 != NULL && ((nb < tmp_2->nb && nb > tmp_1->nb) || tmp_1->nb == start->data->max_list_b))
 	{
 		i++;
 		tmp_1 = tmp_1->next;
 		tmp_2 = tmp_2->next;
 	}
 	//if (nb < start->data->min_list_b || nb > start->data->max_list_b)
-	new_extrema(nb, start);
+//	new_extrema(nb, start);
 	return (i);
 }
 
@@ -274,7 +341,46 @@ void	list_extrema(t_start *start)
 			start->data->max_list_b = tmp->nb;
 		if (tmp->nb < start->data->min_list_b)
 			start->data->min_list_b = tmp->nb;
+		tmp = tmp->next;
 	}
+}
+
+void	exec_operations(t_start *start)
+{
+	Operate_ra(start, start->operations_to_do->ra);
+	Operate_rb(start, start->operations_to_do->rb);
+	Operate_rr(start, start->operations_to_do->rr);
+	Operate_rra(start, start->operations_to_do->rra);
+	Operate_rrb(start, start->operations_to_do->rrb);
+	Operate_rrr(start, start->operations_to_do->rrr);
+	new_extrema(start->list_a->nb ,start);
+	Operate_pb(start, 1);
+	start->data->nb_list_a -= 1;
+	start->data->nb_list_b += 1;
+}
+
+void	Rotate_b(t_start *start)
+{
+	t_stack *min;
+	int		i;
+
+	i = 0;
+	min = start->list_b;
+	printf("%d\n",start->data->min_list_b);
+	while (min->nb != start->data->min_list_b)
+	{
+		i++;
+		min = min->next;
+	}
+	//if (start->data->nb_list_b < i && (i / start->data->nb_list_b) * 100 <= 50)
+		Operate_rb(start, i);
+	//else
+	//	Operate_rrb(start, start->data->nb_list_b - i);
+}
+
+void	Final_Push_a(t_start *start)
+{
+	Operate_pa(start, start->data->nb_list_b);
 }
 
 void	ft_algo(t_start *start)
@@ -282,22 +388,30 @@ void	ft_algo(t_start *start)
 	t_stack		*tmp;
 	int			i;
 
-	i = 0;
 	ft_underaction(start);
 	tmp = start->list_a;
 	list_extrema(start);
 	while (tmp != NULL)
 	{
-		i++;
-		//list_extrema(start);
-		start->data->nb_list_a = ft_count_list(start->list_a);// placer avant et diminier a chaque fois plutot que tout recompter
-		start->data->nb_list_b = ft_count_list(start->list_b);// placer avant et augmenter a chaque fois plutot que tout recompter
-		start->data->place_on_b = correct_place(start, tmp->nb);
-		ft_calcul_operations(tmp->nb, i, start); // calcule le poids si meilleur poids le change;///new_best(start);
+		i = 0;
+		start->data->first_total = 0;
+		ft_reset_operations(start->operations_to_do);
+		while (tmp != NULL)
+		{
+			i++;
+			//list_extrema(start);
+			start->data->place_on_b = correct_place(start, tmp->nb);
+			ft_calcul_operations(tmp->nb, i, start); // calcule le poids si meilleur poids le change;///new_best(start);
+			tmp = tmp->next;
+		}
+		exec_operations(start);
+		tmp = start->list_a;
 	}
-	// executer les actions;
-	
+	Rotate_b(start);
+	Final_Push_a(start);
 }
+
+/*
 
 void	ft_add_start(t_stack *new, t_start *start)
 {
@@ -341,6 +455,7 @@ void	ft_sort(t_start *start)
 		tmp = tmp->next;
 	}
 }
+*/
 
 int     main(int ac, char **av)
 {
@@ -360,13 +475,11 @@ int     main(int ac, char **av)
     ft_double(&start);
 //	ft_sort(start);
 	ft_algo(start);
-
-	/*
-	test = (start->data)->sorted;
+printf("|\n");
+	test = start->list_a;
 	while (test != NULL)
 	{
 		printf("%d\n", test->nb);
 		test = test->next;
 	}
-	*/
 }

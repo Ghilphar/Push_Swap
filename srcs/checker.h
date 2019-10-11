@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 09:14:39 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/10 20:02:21 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/11 01:23:35 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,6 @@ typedef struct		s_data
 	int				first_total;
 }					t_data;
 
-typedef struct      s_start
-{
-	t_nb_operations *operations_to_do;
-	t_nb_operations *operations_tmp;
-	t_data			*data;
-    t_stack			*list_a;
-    t_stack			*list_b;
-}                   t_start;
-
 typedef struct		s_nb_operations
 {
 	int				ra;
@@ -62,6 +53,15 @@ typedef struct		s_nb_operations
 	int				rrr;
 	int				total;
 }					t_nb_operations;
+
+typedef struct      s_start
+{
+	t_nb_operations *operations_to_do;
+	t_nb_operations *operations_tmp;
+	t_data			*data;
+    t_stack			*list_a;
+    t_stack			*list_b;
+}                   t_start;
 
 
 /*
