@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 20:53:53 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/11 04:31:38 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/11 17:03:22 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,7 +283,6 @@ void	ft_calcul_operations(int nb, int i, t_start *start)
 	if (start->operations_tmp->rra == start->data->nb_list_a)
 		start->operations_tmp->rra = 0;
 	start->operations_tmp->rb = start->data->place_on_b;
-	printf("place sur b = %d\n", start->data->place_on_b);
 	start->operations_tmp->rrb = start->data->nb_list_b - start->data->place_on_b;
 	if (start->data->place_on_b == start->data->nb_list_b)
 		start->operations_tmp->rrb = 1;
@@ -306,23 +305,58 @@ int		correct_place(t_start *start, int nb)
 	int			i;
 	t_stack		*tmp_1;
 	t_stack		*tmp_2;
+	t_stack		*last;
 
 	i = 0;
 	tmp_1 = start->list_b;
-	tmp_2 = tmp_1;
-	while (tmp_2->next != NULL)
-		tmp_2 = tmp_2->next;
-	if ((tmp_1->nb < tmp_2->nb && ((nb > tmp_1->nb && nb > tmp_2->nb) ||
-	(nb < tmp_1->nb && nb < tmp_2->nb)))
-	|| ((nb < tmp_1->nb && nb > tmp_2->nb) && tmp_1->nb > tmp_2->nb))
-		return (0);
 	tmp_2 = tmp_1->next;
-	while (tmp_2 != NULL && ((nb < tmp_2->nb && nb > tmp_1->nb) || tmp_1->nb == start->data->max_list_b))
+	last = start->list_b;
+	while (last->next != NULL)
+		last = last->next;
+//	if ((tmp_1->nb < tmp_2->nb && ((nb > tmp_1->nb && nb > tmp_2->nb) ||
+//	(nb < tmp_1->nb && nb < tmp_2->nb)))
+//	|| ((nb < tmp_1->nb && nb > tmp_2->nb) && tmp_1->nb > tmp_2->nb))
+	if ((nb < last->nb && nb < tmp_1->nb) && tmp_1->nb < last->nb && nb > start->data->min_list_b)
+		return (0);
+	if ((nb < tmp_1->nb && nb > last->nb && tmp_1->nb > last->nb) || (nb > tmp_1->nb && nb < last->nb && tmp_1->nb > last->nb))
+		return (0);
+	if ((nb > tmp_1->nb && nb < last->nb) && tmp_1->nb > last->nb && nb < start->data->max_list_b)
+		return (0);
+//	while (tmp_2 != NULL && ((nb < tmp_2->nb && nb > tmp_1->nb) || tmp_1->nb == start->data->max_list_b))
+	if (nb > start->data->max_list_b)
+	{
+		while (tmp_1->nb != start->data->min_list_b)
+		{
+			i++;
+			tmp_1 = tmp_1->next;
+		}
+	}
+	else if (nb < start->data->min_list_b)
+	{
+		while (tmp_1->nb != start->data->min_list_b)
+		{
+			i++;
+			tmp_1 = tmp_1->next;
+		}
+	}
+	else
+	{
+		i++;
+		while ((nb > tmp_1->nb && nb > tmp_2->nb) || (nb < tmp_1->nb && nb < tmp_2->nb) || (nb < tmp_1->nb && nb > tmp_2->nb))
+		{
+			i++;
+			tmp_1 = tmp_1->next;
+			tmp_2 = tmp_2->next;
+		}
+	}
+	/*
+	while(bv > );
 	{
 		i++;
 		tmp_1 = tmp_1->next;
 		tmp_2 = tmp_2->next;
 	}
+	*/
 	//if (nb < start->data->min_list_b || nb > start->data->max_list_b)
 //	new_extrema(nb, start);
 	return (i);
