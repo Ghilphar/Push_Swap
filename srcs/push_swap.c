@@ -6,18 +6,46 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 20:53:53 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/11 17:03:22 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/14 13:10:10 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-/*
-void	ft_pivot(t_start *start, t_stack *last)
+void	print_list_a(t_start *start)
 {
-	start->data->pivot = last->nb;
+	t_stack *test;
+
+	printf("|\n");
+	test = start->list_a;
+	while (test != NULL)
+	{
+		printf("%d\n", test->nb);
+		test = test->next;
+	}
+	printf("|\n");
 }
-*/
+
+void	print_list_b(t_start *start)
+{
+	t_stack *test;
+
+	printf("|\n");
+	test = start->list_b;
+	while (test != NULL)
+	{
+		printf("%d\n", test->nb);
+		test = test->next;
+	}
+	printf("|\n");
+}
+
+void	print_lists(t_start *start)
+{
+	print_list_a(start);
+	print_list_b(start);
+}
+
 void	Operate_pa(t_start *start, int i)
 {
 	while (i-- > 0)
@@ -58,7 +86,7 @@ void	Operate_rr(t_start *start, int i)
 {
 	while (i-- > 0)
 	{
-		reverse_rotate_r(start);
+		rotate_r(start);
 		write(0, "rr\n", 3);
 	}
 }
@@ -89,36 +117,6 @@ void	Operate_rrr(t_start *start, int i)
 		write(0, "rrr\n", 3);
 	}
 }
-
-/*
-void	ft_split(t_stack *list, t_stack *last, t_start *start)
-{
-	t_stack		tmp;
-
-	tmp = list;
-	ft_pivot(start, t_stack *last);
-	while (tmp != NULL)
-	{
-		if (tmp->nb >= start->data->pivot)
-			Operate_pa(start);
-		else if (tmp->nb < start->data->pivot)
-			Operate_ra(start);
-	}
-}
-*/
-/*
-void    ft_algo(t_start *start)
-{
-	t_stack		list;
-	t_stack		last;
-
-	list = start->list_a;
-	last = list;
-	while (last->next != NULL)
-		last = last->next;
-	ft_split(list, last, start);
-}
-*/
 
 int		ft_count_list(t_stack *first_list)
 {
@@ -253,8 +251,8 @@ void	good_combination(t_start *start)
 
 void	new_best(t_start *start)
 {
-	printf("ra = %d, rb = %d, rr = %d, rra = %d, rrb = %d, rrr = %d, total = %d\n", start->operations_tmp->ra, start->operations_tmp->rb,
-	start->operations_tmp->rr, start->operations_tmp->rra, start->operations_tmp->rrb, start->operations_tmp->rrr, start->operations_tmp->total);
+	//printf("ra = %d, rb = %d, rr = %d, rra = %d, rrb = %d, rrr = %d, total = %d\n", start->operations_tmp->ra, start->operations_tmp->rb,
+	//start->operations_tmp->rr, start->operations_tmp->rra, start->operations_tmp->rrb, start->operations_tmp->rrr, start->operations_tmp->total);
 	if (start->operations_tmp->total < start->operations_to_do->total)
 	{
 		free(start->operations_to_do);
@@ -286,8 +284,6 @@ void	ft_calcul_operations(int nb, int i, t_start *start)
 	start->operations_tmp->rrb = start->data->nb_list_b - start->data->place_on_b;
 	if (start->data->place_on_b == start->data->nb_list_b)
 		start->operations_tmp->rrb = 1;
-	//printf("ra = %d, rb = %d, rr = %d, rra = %d, rrb = %d, rrr = %d\n", start->operations_tmp->ra, start->operations_tmp->rb,
-	//start->operations_tmp->rr, start->operations_tmp->rra, start->operations_tmp->rrb, start->operations_tmp->rrr);
 	good_combination(start);
 	new_best(start);
 }
@@ -313,16 +309,12 @@ int		correct_place(t_start *start, int nb)
 	last = start->list_b;
 	while (last->next != NULL)
 		last = last->next;
-//	if ((tmp_1->nb < tmp_2->nb && ((nb > tmp_1->nb && nb > tmp_2->nb) ||
-//	(nb < tmp_1->nb && nb < tmp_2->nb)))
-//	|| ((nb < tmp_1->nb && nb > tmp_2->nb) && tmp_1->nb > tmp_2->nb))
 	if ((nb < last->nb && nb < tmp_1->nb) && tmp_1->nb < last->nb && nb > start->data->min_list_b)
 		return (0);
 	if ((nb < tmp_1->nb && nb > last->nb && tmp_1->nb > last->nb) || (nb > tmp_1->nb && nb < last->nb && tmp_1->nb > last->nb))
 		return (0);
 	if ((nb > tmp_1->nb && nb < last->nb) && tmp_1->nb > last->nb && nb < start->data->max_list_b)
 		return (0);
-//	while (tmp_2 != NULL && ((nb < tmp_2->nb && nb > tmp_1->nb) || tmp_1->nb == start->data->max_list_b))
 	if (nb > start->data->max_list_b)
 	{
 		while (tmp_1->nb != start->data->min_list_b)
@@ -347,18 +339,11 @@ int		correct_place(t_start *start, int nb)
 			i++;
 			tmp_1 = tmp_1->next;
 			tmp_2 = tmp_2->next;
+			printf("tmp1->nb is = %d\n, tmp2->nb is = %d\n", tmp_1->nb, tmp_2->nb);
 		}
 	}
-	/*
-	while(bv > );
-	{
-		i++;
-		tmp_1 = tmp_1->next;
-		tmp_2 = tmp_2->next;
-	}
-	*/
-	//if (nb < start->data->min_list_b || nb > start->data->max_list_b)
-//	new_extrema(nb, start);
+
+	//printf("\ncorrect place for nb = %d\n is %d\n\n", nb, i);
 	return (i);
 }
 
@@ -400,16 +385,15 @@ void	Rotate_b(t_start *start)
 
 	i = 0;
 	min = start->list_b;
-	printf("%d\n",start->data->min_list_b);
 	while (min->nb != start->data->min_list_b)
 	{
 		i++;
 		min = min->next;
 	}
-	//if (start->data->nb_list_b < i && (i / start->data->nb_list_b) * 100 <= 50)
+	if (start->data->nb_list_b < i && (i / start->data->nb_list_b) * 100 <= 50)
 		Operate_rb(start, i);
-	//else
-	//	Operate_rrb(start, start->data->nb_list_b - i);
+	else
+		Operate_rrb(start, start->data->nb_list_b - i);
 }
 
 void	Final_Push_a(t_start *start)
@@ -433,63 +417,17 @@ void	ft_algo(t_start *start)
 		while (tmp != NULL)
 		{
 			i++;
-			//list_extrema(start);
 			start->data->place_on_b = correct_place(start, tmp->nb);
-			ft_calcul_operations(tmp->nb, i, start); // calcule le poids si meilleur poids le change;///new_best(start);
+			ft_calcul_operations(tmp->nb, i, start);
 			tmp = tmp->next;
 		}
 		exec_operations(start);
+		print_lists(start);
 		tmp = start->list_a;
 	}
 	Rotate_b(start);
 	Final_Push_a(start);
 }
-
-/*
-
-void	ft_add_start(t_stack *new, t_start *start)
-{
-	new->next = start->data->sorted;
-	start->data->sorted = new;
-}
-
-void	ft_add_other(t_stack *new, t_start *start)
-{
-	t_stack		*sort;
-	t_stack		*tmp;
-
-	sort = start->data->sorted;
-	while (sort != NULL && sort->nb < new->nb)
-	{
-		tmp = sort;
-		sort = sort->next;
-	}
-	tmp->next = new;
-	new->next = sort;
-}
-
-void	ft_sort(t_start *start)
-{
-	t_stack		*tmp;
-	t_stack		*new;
-
-	tmp = start->list_a;
-	while (tmp != NULL)
-	{
-		new = ft_new(tmp->nb);
-		if (start->data->sorted == NULL)
-			start->data->sorted = new;
-		else
-		{
-			if (new->nb < start->data->sorted->nb)
-				ft_add_start(new, start);
-			else
-				ft_add_other(new, start);
-		}
-		tmp = tmp->next;
-	}
-}
-*/
 
 int     main(int ac, char **av)
 {
@@ -507,13 +445,7 @@ int     main(int ac, char **av)
 	start->data->sorted = NULL;
     ft_initialise(ac, av, &start);
     ft_double(&start);
-//	ft_sort(start);
 	ft_algo(start);
-printf("|\n");
-	test = start->list_a;
-	while (test != NULL)
-	{
-		printf("%d\n", test->nb);
-		test = test->next;
-	}
+
+	print_list_a(start);
 }
