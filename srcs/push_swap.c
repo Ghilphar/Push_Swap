@@ -6,11 +6,35 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 20:53:53 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/14 13:10:10 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/14 15:17:23 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
+
+void	Clear_leaks(t_start *start)
+{
+	t_stack	*to_free;
+	t_stack	*next;
+
+	free(start->operations_to_do);
+	free(start->operations_tmp);
+	free(start->data);
+	to_free = start->list_a;
+	while (to_free != NULL)
+	{
+		next = to_free->next;
+		free(to_free);
+		to_free = next;
+	}
+	to_free = start->list_b;
+	while (to_free != NULL)
+	{
+		next = to_free->next;
+		free(to_free);
+		to_free = next;
+	}
+}
 
 void	print_list_a(t_start *start)
 {
@@ -51,7 +75,7 @@ void	Operate_pa(t_start *start, int i)
 	while (i-- > 0)
 	{
 		push_a(start);
-		write(0,"pa\n", 3);
+		write(1,"pa\n", 3);
 	}
 }
 
@@ -60,7 +84,7 @@ void	Operate_pb(t_start *start, int i)
 	while (i-- > 0)
 	{
 		push_b(start);
-		write(0,"pb\n", 3);
+		write(1,"pb\n", 3);
 	}
 }
 
@@ -69,7 +93,7 @@ void	Operate_ra(t_start *start, int i)
 	while (i-- > 0)
 	{
 		rotate_a(start);
-		write(0, "ra\n", 3);
+		write(1, "ra\n", 3);
 	}
 }
 
@@ -78,7 +102,7 @@ void	Operate_rb(t_start *start, int i)
 	while (i-- > 0)
 	{
 		rotate_b(start);
-		write(0, "rb\n", 3);
+		write(1, "rb\n", 3);
 	}
 }
 
@@ -87,7 +111,7 @@ void	Operate_rr(t_start *start, int i)
 	while (i-- > 0)
 	{
 		rotate_r(start);
-		write(0, "rr\n", 3);
+		write(1, "rr\n", 3);
 	}
 }
 
@@ -96,7 +120,7 @@ void	Operate_rra(t_start *start, int i)
 	while (i-- > 0)
 	{
 		reverse_rotate_a(start);
-		write(0, "rra\n", 4);
+		write(1, "rra\n", 4);
 	}
 }
 
@@ -105,7 +129,7 @@ void	Operate_rrb(t_start *start, int i)
 	while (i-- > 0)
 	{
 		reverse_rotate_b(start);
-		write(0, "rrb\n", 4);
+		write(1, "rrb\n", 4);
 	}
 }
 
@@ -114,7 +138,7 @@ void	Operate_rrr(t_start *start, int i)
 	while (i-- > 0)
 	{
 		reverse_rotate_r(start);
-		write(0, "rrr\n", 3);
+		write(1, "rrr\n", 4);
 	}
 }
 
@@ -144,8 +168,20 @@ void	ft_reset_operations(t_nb_operations *nb_operations)
 	nb_operations->total = 0;
 }
 
+void	little_list(t_start *start)
+{
+	write(1, "to_do\n", 6);
+	return;
+}
+
 void	ft_underaction(t_start *start)
 {
+	start->data->nb_list_a = ft_count_list(start->list_a);
+	if (start->data->nb_list_a <= 10)
+	{
+		little_list(start);
+		exit(EXIT_SUCCESS);
+	}
 	if (!(start->operations_to_do = malloc(sizeof(t_nb_operations))))
 		return;
 	if (!(start->operations_tmp = malloc(sizeof(t_nb_operations))))
@@ -153,7 +189,7 @@ void	ft_underaction(t_start *start)
 	ft_reset_operations(start->operations_to_do);
 	ft_reset_operations(start->operations_tmp);
 	Operate_pb(start, 2);
-	start->data->nb_list_a = ft_count_list(start->list_a);
+	//start->data->nb_list_a = ft_count_list(start->list_a);
 	start->data->nb_list_b = ft_count_list(start->list_b);
 }
 
@@ -251,8 +287,6 @@ void	good_combination(t_start *start)
 
 void	new_best(t_start *start)
 {
-	//printf("ra = %d, rb = %d, rr = %d, rra = %d, rrb = %d, rrr = %d, total = %d\n", start->operations_tmp->ra, start->operations_tmp->rb,
-	//start->operations_tmp->rr, start->operations_tmp->rra, start->operations_tmp->rrb, start->operations_tmp->rrr, start->operations_tmp->total);
 	if (start->operations_tmp->total < start->operations_to_do->total)
 	{
 		free(start->operations_to_do);
@@ -277,7 +311,7 @@ void	new_best(t_start *start)
 void	ft_calcul_operations(int nb, int i, t_start *start)
 {
 	start->operations_tmp->ra = i - 1;
-	start->operations_tmp->rra = start->data->nb_list_a - i + 1; // if result = list_nb , real result is 0;
+	start->operations_tmp->rra = start->data->nb_list_a - i + 1;
 	if (start->operations_tmp->rra == start->data->nb_list_a)
 		start->operations_tmp->rra = 0;
 	start->operations_tmp->rb = start->data->place_on_b;
@@ -339,11 +373,8 @@ int		correct_place(t_start *start, int nb)
 			i++;
 			tmp_1 = tmp_1->next;
 			tmp_2 = tmp_2->next;
-			printf("tmp1->nb is = %d\n, tmp2->nb is = %d\n", tmp_1->nb, tmp_2->nb);
 		}
 	}
-
-	//printf("\ncorrect place for nb = %d\n is %d\n\n", nb, i);
 	return (i);
 }
 
@@ -422,11 +453,26 @@ void	ft_algo(t_start *start)
 			tmp = tmp->next;
 		}
 		exec_operations(start);
-		print_lists(start);
 		tmp = start->list_a;
 	}
 	Rotate_b(start);
 	Final_Push_a(start);
+}
+
+int		test_sorted(t_start *start)
+{
+	t_stack	*to_test;
+	t_stack	*tester;
+
+	to_test = start->list_a;
+	while (to_test != NULL && to_test->next != NULL)
+	{
+		tester = to_test->next;
+		if (to_test->nb > tester->nb)
+			return(0);
+		to_test = tester;
+	}
+	return (1);
 }
 
 int     main(int ac, char **av)
@@ -442,10 +488,14 @@ int     main(int ac, char **av)
     start->list_b = NULL;
 	if (!(start->data = malloc(sizeof(t_data))))
 		return(0);
-	start->data->sorted = NULL;
     ft_initialise(ac, av, &start);
     ft_double(&start);
+	if (test_sorted(start) == 1)
+	{
+		//CLEAR LEAKS BEFORE LEAVE;
+		return (0);
+	}
 	ft_algo(start);
-
-	print_list_a(start);
+	Clear_leaks(start);
+	return (0);
 }

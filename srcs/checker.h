@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 09:14:39 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/11 01:23:35 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/14 13:14:04 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct       s_stack
 
 typedef struct		s_data
 {
-	t_stack			*sorted;
+//	t_stack			*sorted;
 	int				place_on_b;
 	int				max_list_b;
 	int				min_list_b;
