@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 14:45:39 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/08/09 12:30:59 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/15 17:32:35 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_rotates(char *line, t_start *start)
 	else if (ft_strcmp(line, "rb") == 0)
 		rotate_b(start);
 	else if (ft_strcmp(line, "rr") == 0)
-		rotate_r(start);	
+		rotate_r(start);
 }
 
 void	rotate_a(t_start *start)

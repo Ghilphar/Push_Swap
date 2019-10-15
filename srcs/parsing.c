@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 12:34:33 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/09/02 16:24:19 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/15 17:29:38 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_stack	*ft_new(int nb)
 	t_stack		*new;
 
 	if (!(new = malloc(sizeof(t_stack))))
-		return(NULL);
+		return (NULL);
 	new->nb = nb;
 	new->next = NULL;
 	return (new);
@@ -29,11 +29,6 @@ void	ft_add(t_start **start, char *num)
 	t_stack *tmp;
 
 	new = ft_new(ft_atoi(num));
-	/*
-	if (!(new = malloc(sizeof(t_stack))))
-		return;
-	new->nb = ft_atoi(num);
-	new->next = NULL;*/
 	tmp = (*start)->list_a;
 	if (tmp == NULL)
 		(*start)->list_a = new;
@@ -68,7 +63,7 @@ void	ft_initialise(int ac, char **av, t_start **start)
 	}
 }
 
-void	ft_Operate(t_start *start)
+void	ft_operate(t_start *start)
 {
 	char	**line;
 
@@ -83,7 +78,8 @@ void	ft_Operate(t_start *start)
 		else if ((ft_strcmp(*line, "ra") == 0) || (ft_strcmp(*line, "rb") == 0)
 		|| (ft_strcmp(*line, "rr") == 0))
 			ft_rotates(*line, start);
-		else if ((ft_strcmp(*line, "rra") == 0) || (ft_strcmp(*line, "rrb") == 0)
+		else if ((ft_strcmp(*line, "rra") == 0) ||
+		(ft_strcmp(*line, "rrb") == 0)
 		|| (ft_strcmp(*line, "rrr") == 0))
 			ft_reverse_rotates(*line, start);
 		else

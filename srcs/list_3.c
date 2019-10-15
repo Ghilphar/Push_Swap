@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 11:49:53 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/15 11:50:31 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/15 17:22:52 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	rotate_max_bottom(t_start *start)
 
 	i = 0;
 	tmp = start->list_a;
-	while(tmp->nb != start->data->max_list_a)
+	while (tmp->nb != start->data->max_list_a)
 	{
 		i++;
-		tmp = tmp ->next;
+		tmp = tmp->next;
 	}
 	if (i == 0)
 		Operate_ra(start, 1);

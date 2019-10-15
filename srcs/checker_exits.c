@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 09:14:27 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/08/10 09:15:47 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/15 17:03:16 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ void	ft_exit_error(t_start *start)
 	start->list_a = NULL;
 	start->list_b = NULL;
 	free(start);
-	write(2,"Error\n", 6);
+	write(2, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }

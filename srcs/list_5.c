@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 11:51:21 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/15 11:52:02 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/15 17:23:03 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,5 @@ void	little_list(t_start *start)
 		list_3(start);
 	else
 		list_5(start);
-	return;
+	return ;
 }

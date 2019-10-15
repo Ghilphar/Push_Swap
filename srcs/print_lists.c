@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 11:52:21 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/15 16:21:34 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/15 17:29:58 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		test_sorted(t_start *start)
 	{
 		tester = to_test->next;
 		if (to_test->nb > tester->nb)
-			return(0);
+			return (0);
 		to_test = tester;
 	}
 	return (1);

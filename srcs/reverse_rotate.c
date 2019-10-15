@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 14:46:07 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/08/09 12:31:02 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/15 17:32:21 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_reverse_rotates(char *line, t_start *start)
 	else if (ft_strcmp(line, "rrb") == 0)
 		reverse_rotate_b(start);
 	else if (ft_strcmp(line, "rrr") == 0)
-		reverse_rotate_r(start);	
+		reverse_rotate_r(start);
 }
 
 void	reverse_rotate_a(t_start *start)
