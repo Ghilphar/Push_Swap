@@ -6,12 +6,13 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 20:53:53 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/15 09:59:54 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/15 12:07:06 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
+/*
 void	Clear_leaks(t_start *start)
 {
 	t_stack	*to_free;
@@ -35,7 +36,9 @@ void	Clear_leaks(t_start *start)
 		to_free = next;
 	}
 }
+*/
 
+/*
 void	list_extrema_b(t_start *start)
 {
 	t_stack		*tmp;
@@ -52,7 +55,8 @@ void	list_extrema_b(t_start *start)
 		tmp = tmp->next;
 	}
 }
-
+*/
+/*
 void	print_list_a(t_start *start)
 {
 	t_stack *test;
@@ -86,13 +90,15 @@ void	print_lists(t_start *start)
 	print_list_a(start);
 	print_list_b(start);
 }
-
+*/
+/*
 void	Operate_sa(t_start *start)
 {
 	rotate_a(start);
 	write(1, "sa\n", 3);
 }
-
+*/
+/*
 void	Operate_pa(t_start *start, int i)
 {
 	while (i-- > 0)
@@ -110,7 +116,8 @@ void	Operate_pb(t_start *start, int i)
 		write(1,"pb\n", 3);
 	}
 }
-
+*/
+/*
 void	Operate_ra(t_start *start, int i)
 {
 	while (i-- > 0)
@@ -137,7 +144,8 @@ void	Operate_rr(t_start *start, int i)
 		write(1, "rr\n", 3);
 	}
 }
-
+*/
+/*
 void	Operate_rra(t_start *start, int i)
 {
 	while (i-- > 0)
@@ -164,6 +172,7 @@ void	Operate_rrr(t_start *start, int i)
 		write(1, "rrr\n", 4);
 	}
 }
+*/
 
 int		ft_count_list(t_stack *first_list)
 {
@@ -191,6 +200,7 @@ void	ft_reset_operations(t_nb_operations *nb_operations)
 	nb_operations->total = 0;
 }
 
+/*
 void	rotate_max_bottom(t_start *start)
 {
 	t_stack	*tmp;
@@ -217,7 +227,8 @@ void	rotate_min_top(t_start *start)
 	if (tmp->nb != start->data->min_list_a)
 		Operate_sa(start);
 }
-
+*/
+/*
 void	list_extrema_a(t_start *start)
 {
 	t_stack		*tmp;
@@ -235,13 +246,15 @@ void	list_extrema_a(t_start *start)
 	}
 }
 
+
 void	list_3(t_start *start)
 {
 	list_extrema_a(start);
 	rotate_max_bottom(start);
 	rotate_min_top(start);
 }
-
+*/
+/*
 void	max_to_list_b(t_start *start)
 {
 	t_stack *tmp;
@@ -318,7 +331,8 @@ void	ft_underaction(t_start *start)
 	start->data->nb_list_b = ft_count_list(start->list_b);
 	list_extrema_b(start);
 }
-
+*/
+/*
 void	merge_rr_rrr(t_start *start)
 {
 	if (start->operations_tmp->ra <= start->operations_tmp->rb)
@@ -353,7 +367,8 @@ void	total_operations(t_start *start)
 	+ start->operations_tmp->rra + start->operations_tmp->rrb + start->operations_tmp->rr
 	+ start->operations_tmp->rrr;
 }
-
+*/
+/*
 void	choose_ra_rb(t_start *start)
 {
 	start->operations_tmp->rra = 0;
@@ -455,6 +470,7 @@ void	new_extrema(int nb, t_start *start)
 	if (nb > start->data->max_list_b)
 		start->data->max_list_b = nb;
 }
+*/
 
 int		correct_place(t_start *start, int nb)
 {
@@ -504,6 +520,7 @@ int		correct_place(t_start *start, int nb)
 	return (i);
 }
 
+/*
 void	exec_operations(t_start *start)
 {
 	Operate_ra(start, start->operations_to_do->ra);
@@ -517,7 +534,8 @@ void	exec_operations(t_start *start)
 	start->data->nb_list_a -= 1;
 	start->data->nb_list_b += 1;
 }
-
+*/
+/*
 void	Rotate_b(t_start *start)
 {
 	t_stack *max;
@@ -540,6 +558,7 @@ void	Final_Push_a(t_start *start)
 {
 	Operate_pa(start, start->data->nb_list_b);
 }
+*/
 
 void	ft_algo(t_start *start)
 {
@@ -583,6 +602,7 @@ int		test_sorted(t_start *start)
 	return (1);
 }
 
+/*
 void	Clear_leaks_2(t_start *start)
 {
 	t_stack	*to_free;
@@ -606,6 +626,7 @@ void	Clear_leaks_2(t_start *start)
 		to_free = next;
 	}
 }
+*/
 
 int     main(int ac, char **av)
 {
