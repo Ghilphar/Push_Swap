@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 20:53:53 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/14 15:17:23 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/15 09:59:54 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,23 @@ void	Clear_leaks(t_start *start)
 		next = to_free->next;
 		free(to_free);
 		to_free = next;
+	}
+}
+
+void	list_extrema_b(t_start *start)
+{
+	t_stack		*tmp;
+
+	tmp = start->list_b;
+	start->data->max_list_b = tmp->nb;
+	start->data->min_list_b = tmp->nb;
+	while (tmp != NULL)
+	{
+		if (tmp->nb > start->data->max_list_b)
+			start->data->max_list_b = tmp->nb;
+		if (tmp->nb < start->data->min_list_b)
+			start->data->min_list_b = tmp->nb;
+		tmp = tmp->next;
 	}
 }
 
@@ -68,6 +85,12 @@ void	print_lists(t_start *start)
 {
 	print_list_a(start);
 	print_list_b(start);
+}
+
+void	Operate_sa(t_start *start)
+{
+	rotate_a(start);
+	write(1, "sa\n", 3);
 }
 
 void	Operate_pa(t_start *start, int i)
@@ -168,16 +191,119 @@ void	ft_reset_operations(t_nb_operations *nb_operations)
 	nb_operations->total = 0;
 }
 
+void	rotate_max_bottom(t_start *start)
+{
+	t_stack	*tmp;
+	int		i;
+
+	i = 0;
+	tmp = start->list_a;
+	while(tmp->nb != start->data->max_list_a)
+	{
+		i++;
+		tmp = tmp ->next;
+	}
+	if (i == 0)
+		Operate_ra(start, 1);
+	else if (i == 1)
+		Operate_rra(start, 1);
+}
+
+void	rotate_min_top(t_start *start)
+{
+	t_stack *tmp;
+
+	tmp = start->list_a;
+	if (tmp->nb != start->data->min_list_a)
+		Operate_sa(start);
+}
+
+void	list_extrema_a(t_start *start)
+{
+	t_stack		*tmp;
+
+	tmp = start->list_a;
+	start->data->max_list_a = tmp->nb;
+	start->data->min_list_a = tmp->nb;
+	while (tmp != NULL)
+	{
+		if (tmp->nb > start->data->max_list_a)
+			start->data->max_list_a = tmp->nb;
+		if (tmp->nb < start->data->min_list_a)
+			start->data->min_list_a = tmp->nb;
+		tmp = tmp->next;
+	}
+}
+
+void	list_3(t_start *start)
+{
+	list_extrema_a(start);
+	rotate_max_bottom(start);
+	rotate_min_top(start);
+}
+
+void	max_to_list_b(t_start *start)
+{
+	t_stack *tmp;
+	int		i;
+
+	i = 0;
+	tmp = start->list_a;
+	while (tmp->nb != start->data->max_list_a)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	if (i < 3)
+		Operate_ra(start, i);
+	else
+		Operate_rra(start, 4 - i);
+	Operate_pb(start, 1);
+}
+
+void	min_to_list_b(t_start *start)
+{
+	t_stack *tmp;
+	int		i;
+
+	i = 0;
+	tmp = start->list_a;
+	while (tmp->nb != start->data->min_list_a)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	if (i < 3)
+		Operate_ra(start, i);
+	else
+		Operate_rra(start, 5 - i);
+	Operate_pb(start, 1);
+}
+
+void	list_5(t_start *start)
+{
+	list_extrema_a(start);
+	min_to_list_b(start);
+	max_to_list_b(start);
+	list_3(start);
+	Operate_pa(start, 1);
+	Operate_ra(start, 1);
+	Operate_pa(start, 1);
+}
+
 void	little_list(t_start *start)
 {
-	write(1, "to_do\n", 6);
+	if (start->data->nb_list_a == 3)
+		list_3(start);
+	else
+		list_5(start);
 	return;
 }
 
 void	ft_underaction(t_start *start)
 {
 	start->data->nb_list_a = ft_count_list(start->list_a);
-	if (start->data->nb_list_a <= 10)
+	if (start->data->nb_list_a == 3 || start->data->nb_list_a == 5)
 	{
 		little_list(start);
 		exit(EXIT_SUCCESS);
@@ -189,8 +315,8 @@ void	ft_underaction(t_start *start)
 	ft_reset_operations(start->operations_to_do);
 	ft_reset_operations(start->operations_tmp);
 	Operate_pb(start, 2);
-	//start->data->nb_list_a = ft_count_list(start->list_a);
 	start->data->nb_list_b = ft_count_list(start->list_b);
+	list_extrema_b(start);
 }
 
 void	merge_rr_rrr(t_start *start)
@@ -378,23 +504,6 @@ int		correct_place(t_start *start, int nb)
 	return (i);
 }
 
-void	list_extrema(t_start *start)
-{
-	t_stack		*tmp;
-
-	tmp = start->list_b;
-	start->data->max_list_b = tmp->nb;
-	start->data->min_list_b = tmp->nb;
-	while (tmp != NULL)
-	{
-		if (tmp->nb > start->data->max_list_b)
-			start->data->max_list_b = tmp->nb;
-		if (tmp->nb < start->data->min_list_b)
-			start->data->min_list_b = tmp->nb;
-		tmp = tmp->next;
-	}
-}
-
 void	exec_operations(t_start *start)
 {
 	Operate_ra(start, start->operations_to_do->ra);
@@ -411,15 +520,15 @@ void	exec_operations(t_start *start)
 
 void	Rotate_b(t_start *start)
 {
-	t_stack *min;
+	t_stack *max;
 	int		i;
 
 	i = 0;
-	min = start->list_b;
-	while (min->nb != start->data->min_list_b)
+	max = start->list_b;
+	while (max->nb != start->data->max_list_b)
 	{
 		i++;
-		min = min->next;
+		max = max->next;
 	}
 	if (start->data->nb_list_b < i && (i / start->data->nb_list_b) * 100 <= 50)
 		Operate_rb(start, i);
@@ -439,7 +548,6 @@ void	ft_algo(t_start *start)
 
 	ft_underaction(start);
 	tmp = start->list_a;
-	list_extrema(start);
 	while (tmp != NULL)
 	{
 		i = 0;
@@ -475,6 +583,30 @@ int		test_sorted(t_start *start)
 	return (1);
 }
 
+void	Clear_leaks_2(t_start *start)
+{
+	t_stack	*to_free;
+	t_stack	*next;
+
+	//free(start->operations_to_do);
+	//free(start->operations_tmp);
+	free(start->data);
+	to_free = start->list_a;
+	while (to_free != NULL)
+	{
+		next = to_free->next;
+		free(to_free);
+		to_free = next;
+	}
+	to_free = start->list_b;
+	while (to_free != NULL)
+	{
+		next = to_free->next;
+		free(to_free);
+		to_free = next;
+	}
+}
+
 int     main(int ac, char **av)
 {
     t_start *start;
@@ -492,7 +624,7 @@ int     main(int ac, char **av)
     ft_double(&start);
 	if (test_sorted(start) == 1)
 	{
-		//CLEAR LEAKS BEFORE LEAVE;
+		Clear_leaks_2(start);
 		return (0);
 	}
 	ft_algo(start);
