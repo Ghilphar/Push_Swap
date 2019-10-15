@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 20:53:53 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/15 12:07:06 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/15 16:43:02 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ void	Operate_rrr(t_start *start, int i)
 	}
 }
 */
-
+/*
 int		ft_count_list(t_stack *first_list)
 {
 	t_stack		*tmp;
@@ -199,7 +199,7 @@ void	ft_reset_operations(t_nb_operations *nb_operations)
 	nb_operations->rrr = 0;
 	nb_operations->total = 0;
 }
-
+*/
 /*
 void	rotate_max_bottom(t_start *start)
 {
@@ -471,15 +471,13 @@ void	new_extrema(int nb, t_start *start)
 		start->data->max_list_b = nb;
 }
 */
-
-int		correct_place(t_start *start, int nb)
+/*
+int		possibli_first_place(t_start *start, int nb)
 {
-	int			i;
 	t_stack		*tmp_1;
 	t_stack		*tmp_2;
 	t_stack		*last;
 
-	i = 0;
 	tmp_1 = start->list_b;
 	tmp_2 = tmp_1->next;
 	last = start->list_b;
@@ -491,35 +489,94 @@ int		correct_place(t_start *start, int nb)
 		return (0);
 	if ((nb > tmp_1->nb && nb < last->nb) && tmp_1->nb > last->nb && nb < start->data->max_list_b)
 		return (0);
-	if (nb > start->data->max_list_b)
-	{
-		while (tmp_1->nb != start->data->min_list_b)
-		{
-			i++;
-			tmp_1 = tmp_1->next;
-		}
-	}
-	else if (nb < start->data->min_list_b)
-	{
-		while (tmp_1->nb != start->data->min_list_b)
-		{
-			i++;
-			tmp_1 = tmp_1->next;
-		}
-	}
-	else
+	return (1);
+}
+*//*
+int		nb_sup_max(t_start *start, int nb)
+{
+	int			i;
+	t_stack		*tmp_1;
+	t_stack		*tmp_2;
+
+	i = 0;
+	tmp_1 = start->list_b;
+	tmp_2 = tmp_1->next;
+	while (tmp_1->nb != start->data->min_list_b)
 	{
 		i++;
-		while ((nb > tmp_1->nb && nb > tmp_2->nb) || (nb < tmp_1->nb && nb < tmp_2->nb) || (nb < tmp_1->nb && nb > tmp_2->nb))
-		{
-			i++;
-			tmp_1 = tmp_1->next;
-			tmp_2 = tmp_2->next;
-		}
+		tmp_1 = tmp_1->next;
 	}
 	return (i);
 }
 
+int		nb_inf_min(t_start *start, int nb)
+{
+	int			i;
+	t_stack		*tmp_1;
+	t_stack		*tmp_2;
+
+	i = 0;
+	tmp_1 = start->list_b;
+	tmp_2 = tmp_1->next;
+	while (tmp_1->nb != start->data->min_list_b)
+	{
+		i++;
+		tmp_1 = tmp_1->next;
+	}
+	return (i);
+}
+
+int		nb_inf_max_sup_min(t_start *start, int nb)
+{
+	int			i;
+	t_stack		*tmp_1;
+	t_stack		*tmp_2;
+
+	i = 0;
+	tmp_1 = start->list_b;
+	tmp_2 = tmp_1->next;
+	i++;
+	while ((nb > tmp_1->nb && nb > tmp_2->nb) || (nb < tmp_1->nb && nb < tmp_2->nb) || (nb < tmp_1->nb && nb > tmp_2->nb))
+	{
+		i++;
+		tmp_1 = tmp_1->next;
+		tmp_2 = tmp_2->next;
+	}
+	return (i);
+}
+
+int		Place_on_b(t_start *start, int nb)
+{
+	int			i;
+
+	i = 0;
+	if (nb > start->data->max_list_b)
+		i = nb_sup_max(start, nb);
+	else if (nb < start->data->min_list_b)
+		i = nb_inf_min(start, nb);
+	else
+		i = nb_inf_max_sup_min(start, nb);
+	return (i);
+}
+*/
+/*
+int		correct_place(t_start *start, int nb)
+{
+	int			i;
+	t_stack		*tmp_1;
+	t_stack		*tmp_2;
+	t_stack		*last;
+
+	i = 0;
+	tmp_1 = start->list_b;
+	tmp_2 = tmp_1->next;
+	last = start->list_b;
+	if (0 == possibli_first_place(start, i))
+		return (0);
+	i = Place_on_b(start, nb);
+	return (i);
+}
+*/
 /*
 void	exec_operations(t_start *start)
 {
@@ -559,7 +616,7 @@ void	Final_Push_a(t_start *start)
 	Operate_pa(start, start->data->nb_list_b);
 }
 */
-
+/*
 void	ft_algo(t_start *start)
 {
 	t_stack		*tmp;
@@ -585,7 +642,8 @@ void	ft_algo(t_start *start)
 	Rotate_b(start);
 	Final_Push_a(start);
 }
-
+*/
+/*
 int		test_sorted(t_start *start)
 {
 	t_stack	*to_test;
@@ -601,7 +659,7 @@ int		test_sorted(t_start *start)
 	}
 	return (1);
 }
-
+*/
 /*
 void	Clear_leaks_2(t_start *start)
 {

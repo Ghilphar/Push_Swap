@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 12:00:41 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/15 12:01:04 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/15 16:21:55 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,15 @@ void	total_operations(t_start *start)
 	start->operations_tmp->total = start->operations_tmp->ra + start->operations_tmp->rb
 	+ start->operations_tmp->rra + start->operations_tmp->rrb + start->operations_tmp->rr
 	+ start->operations_tmp->rrr;
+}
+
+void	ft_reset_operations(t_nb_operations *nb_operations)
+{
+	nb_operations->ra = 0;
+	nb_operations->rb = 0;
+	nb_operations->rr = 0;
+	nb_operations->rra = 0;
+	nb_operations->rrb = 0;
+	nb_operations->rrr = 0;
+	nb_operations->total = 0;
 }

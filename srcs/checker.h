@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 09:14:39 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/15 08:16:01 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/15 16:59:51 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,125 @@ void		ft_reverse_rotates(char *line, t_start *start);
 void        reverse_rotate_a(t_start *start);
 void        reverse_rotate_b(t_start *start);
 void        reverse_rotate_r(t_start *start);
+
+/*
+** ---------------------Push_Swap
+*/
+
+/*
+**	Clear_Leaks_PS
+*/
+
+void	Clear_leaks(t_start *start);
+void	Clear_leaks_2(t_start *start);
+
+/*
+**	Best_combination
+*/
+
+void	choose_ra_rb(t_start *start);
+void	choose_rra_rrb(t_start *start);
+void	choose_ra_rrb(t_start *start);
+void	choose_rra_rb(t_start *start);
+void	good_combination(t_start *start);
+
+/*
+**	Correct_Place_on_b
+*/
+
+int		nb_sup_max(t_start *start, int nb);
+int		nb_inf_min(t_start *start, int nb);
+int		nb_inf_max_sup_min(t_start *start, int nb);
+int		Place_on_b(t_start *start, int nb);
+
+/*
+**	Correct_Place
+*/
+
+int		correct_place(t_start *start, int nb);
+int		possibli_first_place(t_start *start, int nb);
+void	ft_algo(t_start *start);
+
+/*
+**	Exec_operations
+*/
+
+void	exec_operations(t_start *start);
+void	ft_underaction(t_start *start);
+void	new_best(t_start *start);
+void	ft_calcul_operations(int nb, int i, t_start *start);
+void	new_extrema(int nb, t_start *start);
+
+/*
+**	Extrema_PS
+*/
+
+void	list_extrema_b(t_start *start);
+void	list_extrema_a(t_start *start);
+
+/*
+**	List_3
+*/
+
+void	rotate_max_bottom(t_start *start);
+void	rotate_min_top(t_start *start);
+void	list_3(t_start *start);
+
+/*
+**	List_5
+*/
+
+void	max_to_list_b(t_start *start);
+void	min_to_list_b(t_start *start);
+void	list_5(t_start *start);
+void	little_list(t_start *start);
+
+/*
+**	Merge_total_operations
+*/
+
+void	merge_rr_rrr(t_start *start);
+void	total_operations(t_start *start);
+void	ft_reset_operations(t_nb_operations *nb_operations);
+
+/*
+**	Operate_push_sa
+*/
+
+void	Operate_sa(t_start *start);
+void	Operate_pa(t_start *start, int i);
+void	Operate_pb(t_start *start, int i);
+void	Final_Push_a(t_start *start);
+
+/*
+**	Operate_reverse_rotates
+*/
+
+void	Operate_rra(t_start *start, int i);
+void	Operate_rrb(t_start *start, int i);
+void	Operate_rrr(t_start *start, int i);
+
+/*
+**	Operate_rotates
+*/
+
+void	Operate_ra(t_start *start, int i);
+void	Operate_rb(t_start *start, int i);
+void	Operate_rr(t_start *start, int i);
+void	Rotate_b(t_start *start);
+
+/*
+**	Print_lists
+*/
+
+void	print_list_a(t_start *start);
+void	print_list_b(t_start *start);
+void	print_lists(t_start *start);
+int		ft_count_list(t_stack *first_list);
+int		test_sorted(t_start *start);
+
+/*
+**	
+*/
 
 #endif

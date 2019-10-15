@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 11:52:21 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/15 11:55:04 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/15 16:21:34 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,35 @@ void	print_lists(t_start *start)
 {
 	print_list_a(start);
 	print_list_b(start);
+}
+
+int		ft_count_list(t_stack *first_list)
+{
+	t_stack		*tmp;
+	int			i;
+
+	i = 0;
+	tmp = first_list;
+	while (tmp != NULL)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	return (i);
+}
+
+int		test_sorted(t_start *start)
+{
+	t_stack	*to_test;
+	t_stack	*tester;
+
+	to_test = start->list_a;
+	while (to_test != NULL && to_test->next != NULL)
+	{
+		tester = to_test->next;
+		if (to_test->nb > tester->nb)
+			return(0);
+		to_test = tester;
+	}
+	return (1);
 }
