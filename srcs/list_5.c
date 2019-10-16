@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 11:51:21 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/15 17:23:03 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/16 20:17:47 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	max_to_list_b(t_start *start)
 		tmp = tmp->next;
 	}
 	if (i < 3)
-		Operate_ra(start, i);
+		operate_ra(start, i);
 	else
-		Operate_rra(start, 4 - i);
-	Operate_pb(start, 1);
+		operate_rra(start, 4 - i);
+	operate_pb(start, 1);
 }
 
 void	min_to_list_b(t_start *start)
@@ -44,10 +44,10 @@ void	min_to_list_b(t_start *start)
 		tmp = tmp->next;
 	}
 	if (i < 3)
-		Operate_ra(start, i);
+		operate_ra(start, i);
 	else
-		Operate_rra(start, 5 - i);
-	Operate_pb(start, 1);
+		operate_rra(start, 5 - i);
+	operate_pb(start, 1);
 }
 
 void	list_5(t_start *start)
@@ -56,9 +56,9 @@ void	list_5(t_start *start)
 	min_to_list_b(start);
 	max_to_list_b(start);
 	list_3(start);
-	Operate_pa(start, 1);
-	Operate_ra(start, 1);
-	Operate_pa(start, 1);
+	operate_pa(start, 1);
+	operate_ra(start, 1);
+	operate_pa(start, 1);
 }
 
 void	little_list(t_start *start)

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Operate_rotates.c                                  :+:      :+:    :+:   */
+/*   operate_rotates.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 11:55:18 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/15 12:04:28 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/16 20:30:23 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void	Operate_ra(t_start *start, int i)
+void	operate_ra(t_start *start, int i)
 {
 	while (i-- > 0)
 	{
@@ -21,7 +21,7 @@ void	Operate_ra(t_start *start, int i)
 	}
 }
 
-void	Operate_rb(t_start *start, int i)
+void	operate_rb(t_start *start, int i)
 {
 	while (i-- > 0)
 	{
@@ -30,7 +30,7 @@ void	Operate_rb(t_start *start, int i)
 	}
 }
 
-void	Operate_rr(t_start *start, int i)
+void	operate_rr(t_start *start, int i)
 {
 	while (i-- > 0)
 	{
@@ -39,7 +39,7 @@ void	Operate_rr(t_start *start, int i)
 	}
 }
 
-void	Rotate_b(t_start *start)
+void	rotate_final_b(t_start *start)
 {
 	t_stack *max;
 	int		i;
@@ -52,7 +52,7 @@ void	Rotate_b(t_start *start)
 		max = max->next;
 	}
 	if (start->data->nb_list_b < i && (i / start->data->nb_list_b) * 100 <= 50)
-		Operate_rb(start, i);
+		operate_rb(start, i);
 	else
-		Operate_rrb(start, start->data->nb_list_b - i);
+		operate_rrb(start, start->data->nb_list_b - i);
 }

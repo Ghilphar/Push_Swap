@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Exec_operations.c                                  :+:      :+:    :+:   */
+/*   exec_operations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 12:05:05 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/15 12:07:12 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/16 20:19:05 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	exec_operations(t_start *start)
 {
-	Operate_ra(start, start->operations_to_do->ra);
-	Operate_rb(start, start->operations_to_do->rb);
-	Operate_rr(start, start->operations_to_do->rr);
-	Operate_rra(start, start->operations_to_do->rra);
-	Operate_rrb(start, start->operations_to_do->rrb);
-	Operate_rrr(start, start->operations_to_do->rrr);
-	new_extrema(start->list_a->nb ,start);
-	Operate_pb(start, 1);
+	operate_ra(start, start->operations_to_do->ra);
+	operate_rb(start, start->operations_to_do->rb);
+	operate_rr(start, start->operations_to_do->rr);
+	operate_rra(start, start->operations_to_do->rra);
+	operate_rrb(start, start->operations_to_do->rrb);
+	operate_rrr(start, start->operations_to_do->rrr);
+	new_extrema(start->list_a->nb, start);
+	operate_pb(start, 1);
 	start->data->nb_list_a -= 1;
 	start->data->nb_list_b += 1;
 }
@@ -35,12 +35,12 @@ void	ft_underaction(t_start *start)
 		exit(EXIT_SUCCESS);
 	}
 	if (!(start->operations_to_do = malloc(sizeof(t_nb_operations))))
-		return;
+		return ;
 	if (!(start->operations_tmp = malloc(sizeof(t_nb_operations))))
-		return;
+		return ;
 	ft_reset_operations(start->operations_to_do);
 	ft_reset_operations(start->operations_tmp);
-	Operate_pb(start, 2);
+	operate_pb(start, 2);
 	start->data->nb_list_b = ft_count_list(start->list_b);
 	list_extrema_b(start);
 }
@@ -52,7 +52,7 @@ void	new_best(t_start *start)
 		free(start->operations_to_do);
 		start->operations_to_do = start->operations_tmp;
 		if (!(start->operations_tmp = malloc(sizeof(t_nb_operations))))
-			return;
+			return ;
 		ft_reset_operations(start->operations_tmp);
 	}
 	else if (start->data->first_total == 0)
@@ -61,21 +61,22 @@ void	new_best(t_start *start)
 		free(start->operations_to_do);
 		start->operations_to_do = start->operations_tmp;
 		if (!(start->operations_tmp = malloc(sizeof(t_nb_operations))))
-			return;
+			return ;
 		ft_reset_operations(start->operations_tmp);
 	}
 	else
 		ft_reset_operations(start->operations_tmp);
 }
 
-void	ft_calcul_operations(int nb, int i, t_start *start)
+void	ft_calcul_operations(int i, t_start *start)
 {
 	start->operations_tmp->ra = i - 1;
 	start->operations_tmp->rra = start->data->nb_list_a - i + 1;
 	if (start->operations_tmp->rra == start->data->nb_list_a)
 		start->operations_tmp->rra = 0;
 	start->operations_tmp->rb = start->data->place_on_b;
-	start->operations_tmp->rrb = start->data->nb_list_b - start->data->place_on_b;
+	start->operations_tmp->rrb = start->data->nb_list_b -
+	start->data->place_on_b;
 	if (start->data->place_on_b == start->data->nb_list_b)
 		start->operations_tmp->rrb = 1;
 	good_combination(start);

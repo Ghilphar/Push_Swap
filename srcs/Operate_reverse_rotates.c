@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Operate_reverse_rotates.c                          :+:      :+:    :+:   */
+/*   operate_reverse_rotates.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 11:55:53 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/15 11:56:09 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/15 17:27:51 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void	Operate_rra(t_start *start, int i)
+void	operate_rra(t_start *start, int i)
 {
 	while (i-- > 0)
 	{
@@ -21,7 +21,7 @@ void	Operate_rra(t_start *start, int i)
 	}
 }
 
-void	Operate_rrb(t_start *start, int i)
+void	operate_rrb(t_start *start, int i)
 {
 	while (i-- > 0)
 	{
@@ -30,7 +30,7 @@ void	Operate_rrb(t_start *start, int i)
 	}
 }
 
-void	Operate_rrr(t_start *start, int i)
+void	operate_rrr(t_start *start, int i)
 {
 	while (i-- > 0)
 	{

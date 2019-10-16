@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 11:49:53 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/15 17:22:52 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/16 20:17:16 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	rotate_max_bottom(t_start *start)
 		tmp = tmp->next;
 	}
 	if (i == 0)
-		Operate_ra(start, 1);
+		operate_ra(start, 1);
 	else if (i == 1)
-		Operate_rra(start, 1);
+		operate_rra(start, 1);
 }
 
 void	rotate_min_top(t_start *start)
@@ -36,7 +36,7 @@ void	rotate_min_top(t_start *start)
 
 	tmp = start->list_a;
 	if (tmp->nb != start->data->min_list_a)
-		Operate_sa(start);
+		operate_sa(start);
 }
 
 void	list_3(t_start *start)

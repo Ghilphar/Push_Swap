@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 09:14:39 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/15 17:26:11 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/16 20:30:12 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,8 +142,8 @@ void				good_combination(t_start *start);
 **	Correct_Place_on_b
 */
 
-int					nb_sup_max(t_start *start, int nb);
-int					nb_inf_min(t_start *start, int nb);
+int					nb_sup_max(t_start *start);
+int					nb_inf_min(t_start *start);
 int					nb_inf_max_sup_min(t_start *start, int nb);
 int					place_on_b(t_start *start, int nb);
 
@@ -162,7 +162,7 @@ void				ft_algo(t_start *start);
 void				exec_operations(t_start *start);
 void				ft_underaction(t_start *start);
 void				new_best(t_start *start);
-void				ft_calcul_operations(int nb, int i, t_start *start);
+void				ft_calcul_operations(int i, t_start *start);
 void				new_extrema(int nb, t_start *start);
 
 /*
@@ -222,7 +222,7 @@ void				operate_rrr(t_start *start, int i);
 void				operate_ra(t_start *start, int i);
 void				operate_rb(t_start *start, int i);
 void				operate_rr(t_start *start, int i);
-void				rotate_b(t_start *start);
+void				rotate_final_b(t_start *start);
 
 /*
 **	Print_lists

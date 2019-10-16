@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Correct_Place_on_b.c                               :+:      :+:    :+:   */
+/*   correct_place_on_b.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 16:42:37 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/15 16:43:08 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/16 20:21:13 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-int		nb_sup_max(t_start *start, int nb)
+int		nb_sup_max(t_start *start)
 {
 	int			i;
 	t_stack		*tmp_1;
@@ -29,7 +29,7 @@ int		nb_sup_max(t_start *start, int nb)
 	return (i);
 }
 
-int		nb_inf_min(t_start *start, int nb)
+int		nb_inf_min(t_start *start)
 {
 	int			i;
 	t_stack		*tmp_1;
@@ -56,7 +56,8 @@ int		nb_inf_max_sup_min(t_start *start, int nb)
 	tmp_1 = start->list_b;
 	tmp_2 = tmp_1->next;
 	i++;
-	while ((nb > tmp_1->nb && nb > tmp_2->nb) || (nb < tmp_1->nb && nb < tmp_2->nb) || (nb < tmp_1->nb && nb > tmp_2->nb))
+	while ((nb > tmp_1->nb && nb > tmp_2->nb) ||
+	(nb < tmp_1->nb && nb < tmp_2->nb) || (nb < tmp_1->nb && nb > tmp_2->nb))
 	{
 		i++;
 		tmp_1 = tmp_1->next;
@@ -65,15 +66,15 @@ int		nb_inf_max_sup_min(t_start *start, int nb)
 	return (i);
 }
 
-int		Place_on_b(t_start *start, int nb)
+int		place_on_b(t_start *start, int nb)
 {
 	int			i;
 
 	i = 0;
 	if (nb > start->data->max_list_b)
-		i = nb_sup_max(start, nb);
+		i = nb_sup_max(start);
 	else if (nb < start->data->min_list_b)
-		i = nb_inf_min(start, nb);
+		i = nb_inf_min(start);
 	else
 		i = nb_inf_max_sup_min(start, nb);
 	return (i);
