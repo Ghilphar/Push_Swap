@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 11:55:18 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/16 20:30:23 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/17 13:52:07 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	rotate_final_b(t_start *start)
 		i++;
 		max = max->next;
 	}
-	if (start->data->nb_list_b < i && (i / start->data->nb_list_b) * 100 <= 50)
+	if ((i / start->data->nb_list_b) * 100 <= 50)
 		operate_rb(start, i);
 	else
 		operate_rrb(start, start->data->nb_list_b - i);

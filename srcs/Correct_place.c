@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 16:40:18 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/16 20:31:50 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/17 13:59:57 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		correct_place(t_start *start, int nb)
 	tmp_1 = start->list_b;
 	tmp_2 = tmp_1->next;
 	last = start->list_b;
-	if (0 == possibli_first_place(start, i))
+	if (0 == possibli_first_place(start, nb))
 		return (0);
 	i = place_on_b(start, nb);
 	return (i);
