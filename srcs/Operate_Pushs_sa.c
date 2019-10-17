@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 11:54:39 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/17 13:51:25 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/17 17:22:16 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	operate_pb(t_start *start, int i)
 
 void	final_push_a(t_start *start)
 {
+	operate_pa(start, start->data->nb_list_b);
+	/*
 	while (start->data->nb_list_b > 0)
 	{
 		operate_pa(start, 1);
@@ -45,4 +47,5 @@ void	final_push_a(t_start *start)
 		if (start->data->nb_list_b > 1)
 			operate_rrb(start, 1);
 	}
+	*/
 }

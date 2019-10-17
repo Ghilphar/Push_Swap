@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 16:40:18 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/17 13:59:57 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/17 17:16:05 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,20 @@ int		possibli_first_place(t_start *start, int nb)
 	last = start->list_b;
 	while (last->next != NULL)
 		last = last->next;
-	if ((nb < last->nb && nb < tmp_1->nb) && tmp_1->nb < last->nb &&
-	nb > start->data->min_list_b)
+	//if ((nb < last->nb && nb < tmp_1->nb) && tmp_1->nb < last->nb &&
+	//nb > start->data->min_list_b)
+	if ((nb < last->nb && nb < tmp_1->nb) && tmp_1->nb > last->nb &&
+	nb < start->data->min_list_b)
 		return (0);
-	if ((nb < tmp_1->nb && nb > last->nb && tmp_1->nb > last->nb) ||
-	(nb > tmp_1->nb && nb < last->nb && tmp_1->nb > last->nb))
+	//if ((nb < tmp_1->nb && nb > last->nb && tmp_1->nb > last->nb) ||
+	//(nb > tmp_1->nb && nb < last->nb && tmp_1->nb > last->nb))
+	if ((nb < tmp_1->nb && nb > last->nb && tmp_1->nb < last->nb) ||
+	(nb > tmp_1->nb && nb < last->nb && tmp_1->nb < last->nb))
 		return (0);
-	if ((nb > tmp_1->nb && nb < last->nb) && tmp_1->nb > last->nb &&
-	nb < start->data->max_list_b)
+	//if ((nb > tmp_1->nb && nb < last->nb) && tmp_1->nb > last->nb &&
+	//nb < start->data->max_list_b)
+	if ((nb > tmp_1->nb && nb < last->nb) && tmp_1->nb < last->nb &&
+	nb > start->data->max_list_b)
 		return (0);
 	return (1);
 }

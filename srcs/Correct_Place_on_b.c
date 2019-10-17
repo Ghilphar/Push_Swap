@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 16:42:37 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/17 13:45:14 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/17 17:14:15 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int		nb_sup_max(t_start *start)
 	t_stack		*tmp_1;
 	t_stack		*tmp_2;
 
-	i = 0;
+	//i = 0;
+	i = 1;
 	tmp_1 = start->list_b;
 	tmp_2 = tmp_1->next;
 	while (tmp_1->nb != start->data->min_list_b)
@@ -35,7 +36,8 @@ int		nb_inf_min(t_start *start)
 	t_stack		*tmp_1;
 	t_stack		*tmp_2;
 
-	i = 0;
+	//i = 0;
+	i = 1;
 	tmp_1 = start->list_b;
 	tmp_2 = tmp_1->next;
 	while (tmp_1->nb != start->data->min_list_b)
@@ -57,8 +59,10 @@ int		nb_inf_max_sup_min(t_start *start, int nb)
 	tmp_2 = tmp_1->next;
 	i++;
 
+	//while ((nb > tmp_1->nb && nb > tmp_2->nb) ||
+	//(nb < tmp_1->nb && nb < tmp_2->nb) || (nb < tmp_1->nb && nb > tmp_2->nb))
 	while ((nb > tmp_1->nb && nb > tmp_2->nb) ||
-	(nb < tmp_1->nb && nb < tmp_2->nb) || (nb < tmp_1->nb && nb > tmp_2->nb))
+	(nb < tmp_1->nb && nb < tmp_2->nb) || (nb > tmp_1->nb && nb < tmp_2->nb))
 	{
 		i++;
 		tmp_1 = tmp_1->next;
