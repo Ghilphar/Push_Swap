@@ -6,7 +6,7 @@
 #    By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:15:16 by fgaribot          #+#    #+#              #
-#    Updated: 2019/08/10 10:45:34 by fgaribot         ###   ########.fr        #
+#    Updated: 2019/11/04 16:41:01 by fgaribot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra -I ./includes
 AR = ar rc
 SRC = ./
-FILES = $(SRC)ft_memset.c\
+FILES = $(SRC)ft_abs.c\
+		$(SRC)ft_memset.c\
 		$(SRC)ft_bzero.c\
 		$(SRC)ft_memcpy.c\
 		$(SRC)ft_memccpy.c\
@@ -83,6 +84,7 @@ FILES = $(SRC)ft_memset.c\
 		$(SRC)ft_recursive_power.c\
 		$(SRC)get_next_line.c\
 		$(SRC)ft_strtrimc.c\
+		$(SRC)ft_strcpc_include_c.c\
 		$(SRC)ft_replace.c
 
 OBJ = $(FILES:.c=.o)

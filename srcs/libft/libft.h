@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 18:17:52 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/08/10 09:09:21 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/11/04 16:40:21 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <string.h>
 
-
 typedef	struct		s_list
 {
 	void			*content;
@@ -23,6 +22,7 @@ typedef	struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+int					ft_abs(int nb);
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
@@ -93,5 +93,6 @@ int					get_next_line(int fd, char **line);
 char				*ft_replace(char *str, char find, char replace);
 char				*ft_strtrimc(char *s, char c);
 int					ft_isanint(char *str);
+char				*ft_strcpc_include_c(char *dest, char *src, char c);
 
 #endif

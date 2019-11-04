@@ -1,38 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   ft_strcpc_include_c.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/10 09:14:33 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/11/04 21:05:05 by fgaribot         ###   ########.fr       */
+/*   Created: 2018/11/13 10:09:24 by fgaribot          #+#    #+#             */
+/*   Updated: 2019/11/04 16:54:07 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include <string.h>
 
-void	check_empty(t_start *start)
+char	*ft_strcpc_include_c(char *dest, char *src, char c)
 {
-	if (start->list_a == 0)
+	int		i;
+
+	i = 0;
+	if (!dest || !src)
+		return (NULL);
+	while (src[i])
 	{
-		free(start);
-		exit(EXIT_SUCCESS);
+		dest[i] = src[i];
+		if (src[i++] == c)
+			break ;
 	}
-}
-
-int		main(int ac, char **av)
-{
-	t_start	*start;
-
-	if (!(start = malloc(sizeof(t_start))))
-		return (0);
-	start->list_a = NULL;
-	start->list_b = NULL;
-	ft_initialise(ac, av, &start);
-	check_empty(start);
-	ft_double(&start);
-	ft_operate(start);
-	ft_sorted(start);
-	ft_exit_success(start);
+	dest[i] = '\0';
+	return (dest);
 }

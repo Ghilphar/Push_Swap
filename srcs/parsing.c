@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 12:34:33 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/10/15 17:29:38 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/11/04 20:21:29 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,21 +66,23 @@ void	ft_initialise(int ac, char **av, t_start **start)
 void	ft_operate(t_start *start)
 {
 	char	**line;
+	int		ret;
 
 	line = malloc(sizeof(line));
-	while (get_next_line(0, line) == 1)
+	while ((ret = get_next_line(0, line)) == 1)
 	{
-		if ((ft_strcmp(*line, "sa")) == 0 || (ft_strcmp(*line, "sb") == 0)
-		|| (ft_strcmp(*line, "ss") == 0))
+		// printf("ret:%d\n", ret);
+		if ((ft_strcmp(*line, "sa\n")) == 0 || (ft_strcmp(*line, "sb\n") == 0)
+		|| (ft_strcmp(*line, "ss\n") == 0))
 			ft_swaps(*line, start);
-		else if ((ft_strcmp(*line, "pa") == 0) || (ft_strcmp(*line, "pb") == 0))
+		else if ((ft_strcmp(*line, "pa\n") == 0) || (ft_strcmp(*line, "pb\n") == 0))
 			ft_pushs(*line, start);
-		else if ((ft_strcmp(*line, "ra") == 0) || (ft_strcmp(*line, "rb") == 0)
-		|| (ft_strcmp(*line, "rr") == 0))
+		else if ((ft_strcmp(*line, "ra\n") == 0) || (ft_strcmp(*line, "rb\n") == 0)
+		|| (ft_strcmp(*line, "rr\n") == 0))
 			ft_rotates(*line, start);
-		else if ((ft_strcmp(*line, "rra") == 0) ||
-		(ft_strcmp(*line, "rrb") == 0)
-		|| (ft_strcmp(*line, "rrr") == 0))
+		else if ((ft_strcmp(*line, "rra\n") == 0) ||
+		(ft_strcmp(*line, "rrb\n") == 0)
+		|| (ft_strcmp(*line, "rrr\n") == 0))
 			ft_reverse_rotates(*line, start);
 		else
 		{
@@ -88,5 +90,6 @@ void	ft_operate(t_start *start)
 			ft_exit_error(start);
 		}
 	}
+	// printf("ret:%d\n", ret);
 	free(line);
 }

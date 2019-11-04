@@ -6,28 +6,35 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 09:08:26 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/08/10 09:08:50 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/10/23 18:52:42 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int		ft_isanint(char *str)
 {
 	int			i;
+	int			x;
+	int			neg;
 
 	i = 0;
+	neg = 1;
 	if (!str)
-		return(0);
-	while (str[i])
-	{
-		if ((str[i] < 48 || str[i] > 57) && str[i] != 45)
-			return (0);
+		return (0);
+	if (str[0] == 43 || str[0] == 45)
 		i++;
-		if (i > 11)
+	if (str[0] == 45)
+		neg = -1;
+	while (str[i] == 48)
+		i++;
+	x = i - 1;
+	while (str[++x])
+	{
+		if ((str[x] < 48 || str[x] > 57) || (x - i > 10))
 			return (0);
 	}
-	if (i == 11 && (str[0] != '-' || str[1] > '2' || str[10] > '8'))
-		return (0);
-	if (i == 10 && (str[0] > '2' || str[9] > '7'))
+	if ((x - i == 10 && neg == 1 && (str[i] > '2' || str[x - 1] > '7')) ||
+	(x - i == 10 && neg == -1 && (str[i] > '2' || str[x - 1] > '8')) ||
+	(neg == -1 && x == i))
 		return (0);
 	return (1);
 }

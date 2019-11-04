@@ -6,7 +6,7 @@
 /*   By: fgaribot <fgaribot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 14:35:06 by fgaribot          #+#    #+#             */
-/*   Updated: 2019/08/09 13:33:10 by fgaribot         ###   ########.fr       */
+/*   Updated: 2019/11/04 21:03:32 by fgaribot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char		*ft_addline(char **line, char *src, char c)
 	i = ft_countchar(src, c);
 	if (!(tmp = malloc(sizeof(tmp) * (i + 1))))
 		return (0);
-	tmp = ft_strcpc(tmp, src, c);
+	tmp = ft_strcpc_include_c(tmp, src, c);
 	*line = tmp;
 	if (src[i] == '\n')
 	{
@@ -74,10 +74,10 @@ static int		ft_read(int fd, void **str)
 			return (-1);
 		free(tmp);
 		tmp = NULL;
-		if (ft_strchr(buf, '\n'))
+		if (ft_memchr(buf, '\n', read_size))
 			break ;
 	}
-	if (read_size < BUFF_SIZE && !ft_strlen(*str))
+	if ((read_size == 0) && !ft_strlen(*str))
 		return (0);
 	return (1);
 }
